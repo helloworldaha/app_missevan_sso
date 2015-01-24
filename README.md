@@ -15,7 +15,7 @@ auth='<message> <sign> <timestamp>'
 ### action:
 
 ```
-token, login, logout, update
+token, login, logout, register, update
 ```
 
 ### message (base64-encoded):
