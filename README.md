@@ -3,13 +3,19 @@
 ## 使用方法
 
 ```
-POST /sso
+POST /sso/<action>
 ```
 
 ## 参数
 
 ```
 auth='<message> <sign> <timestamp>'
+```
+
+### action:
+
+```
+login, logout, update
 ```
 
 ### message (base64-encoded):
@@ -29,3 +35,25 @@ HMAC->SHA1(secret_key, '<message> <timestamp>')
 ### timestamp:
 
 秒级时间戳
+
+## 返回
+
+JSON data
+
+### login:
+
+```
+{"code",<code num>,"token":"<token>","user":<userdata>}
+```
+
+### logout:
+
+```
+{"code",<code num>}
+```
+
+### update:
+
+```
+{"code",<code num>,"token":"<token>"}
+```
