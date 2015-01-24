@@ -23,10 +23,10 @@ token, login, logout, update
 base64-encoded JSON data
 
 ```
-login: {"username":"<username>","password":"<password>","maxAgeType":<max-age type>}
+login: {"username":"<username>","password":"<password>","ip":"<ip>","maxAgeType":<max-age type>}
 可选: "maxAgeType", 默认: 0
 
-token, update, login: {"token":"<token>"}
+token, update, login: {"token":"<token>","ip":"<ip>"}
 
 base64('<JSON data>')
 ```
