@@ -18,6 +18,13 @@ var config = {
   },
   sys: {
     root_dir: root_dir
+  },
+  db: {
+    /* database configurations */
+    username: '',
+    password: '',
+    host: '127.0.0.1:27017',
+    name: 'sso'
   }
 };
 
