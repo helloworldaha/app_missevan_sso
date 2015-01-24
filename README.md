@@ -9,7 +9,7 @@ POST /sso
 ## 参数
 
 ```
-auth='&lt;message&gt; &lt;sign&gt; &lt;timestamp&gt;'
+auth='<message> <sign> <timestamp>'
 ```
 
 ### message (base64-encoded):
@@ -17,11 +17,15 @@ auth='&lt;message&gt; &lt;sign&gt; &lt;timestamp&gt;'
 base64-encoded JSON data
 
 ```
-base64('{"username":"&lt;username&gt;","password":"&lt;password&gt;"}')
+base64('{"username":"<username>","password":"<password>"}')
 ```
 
 ### sign:
 
 ```
-HMAC->SHA1(secret_key, '&lt;message&gt; &lt;timestamp&gt;')
+HMAC->SHA1(secret_key, '<message> <timestamp>')
 ```
+
+### timestamp:
+
+秒级时间戳
