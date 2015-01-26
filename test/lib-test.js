@@ -9,6 +9,12 @@ describe("common", function() {
   it("md5('a') should be '0cc175b9c0f1b6a831c399e269772661'", function() {
     common.md5('a').should.eql("0cc175b9c0f1b6a831c399e269772661");
   });
+  it("base64('a') should be 'YQ=='", function() {
+    common.base64('a').should.eql("YQ==");
+  });
+  it("hmac_sha1('secret_key', 'a') should be 'e1235c6e4fb1e406fc75ae717afbd1d5d380ca3f'", function() {
+    common.hmac_sha1('secret_key', 'a').should.eql("e1235c6e4fb1e406fc75ae717afbd1d5d380ca3f");
+  });
   it("is_empty_object({}) should be true", function() {
     common.is_empty_object({}).should.eql(true);
   });
