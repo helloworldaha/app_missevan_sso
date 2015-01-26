@@ -5,7 +5,9 @@ var Model = require('./../../model');
 
 module.exports = function (sso) {
   sso.post('/login', function *(next) {
-    console.log(this.auth);
-    this.body = 'login';
+    if (this.auth) {
+      
+    }
+    this.body = 'Not auth';
   });
 };

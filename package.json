@@ -16,7 +16,7 @@
     "mysql": "^2.5.4",
     "redis": "*",
     "underscore": "*",
-    "validator": "3.22.1"
+    "validator": "^3.28.0"
   },
   "devDependencies": {}
 }
