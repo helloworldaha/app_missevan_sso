@@ -34,7 +34,7 @@ base64('<JSON data>')
 ### sign:
 
 ```
-HMAC->SHA1(secret_key, '<message> <timestamp>')
+HMAC->SHA1(secret_key, '<message> <timestamp>')  (小写hex文本)
 ```
 
 ### timestamp:
