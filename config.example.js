@@ -21,10 +21,20 @@ var config = {
   },
   db: {
     /* database configurations */
-    username: '',
-    password: '',
-    host: '127.0.0.1:27017',
-    name: 'sso'
+    mysql: {
+      host: '192.168.1.147',
+      name: 'app_missevan_sso',
+      username: 'root',
+      password: '123456789',
+      table: 'm_user'
+    },
+    mongo: {
+      host: '192.168.1.147',
+      name: 'sso',
+      username: '',
+      password: '',
+      collection: 'records'
+    }
   }
 };
 
