@@ -8,6 +8,5 @@ module.exports = function (sso) {
     if (this.auth) {
       
     }
-    this.body = 'Not auth';
   });
 };
