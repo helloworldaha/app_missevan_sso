@@ -14,7 +14,8 @@ var config = {
     port: 3002
   },
   app: {
-    dev_mode: true
+    dev_mode: true,
+    secret_key: 'H1m60ntHOwKXniIXNxEBMxSSsk0Env1deAhJ'
   },
   sys: {
     root_dir: root_dir
