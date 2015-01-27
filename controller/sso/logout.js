@@ -26,8 +26,6 @@ module.exports = function (sso) {
       } else {
         r.code = 5;
       }
-    } else {
-      r.code = -1;
     }
     r.message = errmsg(r.code);
     this.body = r;

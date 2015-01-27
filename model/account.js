@@ -37,7 +37,32 @@ function Account(user) {
 }
 
 Account.table = config2['table'];
+Account.fields = {
+  'email': 'string',
+  'username': 'string', 'password': 'string',
+  'cip': 'string', 'uip': 'string',
+  'confirm': 'number',
+  'iconid': 'number', 'iconurl': 'string', 'iconcolor': 'string'
+};
 Account.supportThirdUid = ['qquid', 'weibouid'];
+
+Account.format = function (data) {
+  var ud = {};
+  var fields = Account.fields;
+  for (var k in fields) {
+    if (data[k] && typeof data[k] === fields[k]) {
+      ud[k] = data[k];
+    }
+  }
+  if (ud.username) {
+    ud.username = ud.username.trim();
+  }
+  if (ud.password) {
+    ud.salt = hat(48); //12di
+    ud.password = Account.hashPassword(ud.password, ud.salt);
+  }
+  return ud;
+};
 
 Account.prototype.set = function (user) {
   if (user) {
@@ -61,24 +86,19 @@ Account.prototype.exists = function *(data) {
   return (r && r[0] && r[0][0]) ? r[0][0].count > 0 : false;
 };
 
+Account.prototype.save = function *(data) {
+  var ud = Account.format(data);
+  if (common.is_empty_object(ud)) {
+    return false;
+  }
+
+  ud.ctime = Math.floor(Date.now() / 1000);
+  var r = yield yconn.query('INSERT INTO ' + Account.table + ' SET ?', ud);
+  return (r && r[0]) ? r[0].insertId : 0;
+};
+
 Account.prototype.update = function *(data) {
-  var ud = {};
-  var fields = {
-    'username': 'string', 'password': 'string', 'uip': 'string',
-    'iconid': 'number', 'iconurl': 'string', 'iconcolor': 'string'
-  };
-  for (var k in fields) {
-    if (data[k] && typeof data[k] === fields[k]) {
-      ud[k] = data[k];
-    }
-  }
-  if (ud.username) {
-    ud.username = ud.username.trim();
-  }
-  if (ud.password) {
-    ud.salt = hat(48); //12di
-    ud.password = Account.hashPassword(ud.password, ud.salt);
-  }
+  var ud = Account.format(data);
   if (common.is_empty_object(ud)) {
     return false;
   }

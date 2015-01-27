@@ -2,10 +2,10 @@
 
 var config = require('./../../config');
 var errmsg = require('./../../lib/errno').errmsg,
-common = require('./../../lib/common');
+  common = require('./../../lib/common');
 var Model = require('./../../model'),
-Account = Model.Account,
-Session = Model.Session;
+  Account = Model.Account,
+  Session = Model.Session;
 
 module.exports = function (sso) {
   sso.post('/session', function *(next) {
@@ -26,8 +26,6 @@ module.exports = function (sso) {
       } else {
         r.code = 5;
       }
-    } else {
-      r.code = -1;
     }
     r.message = errmsg(r.code);
     this.body = r;

@@ -54,7 +54,7 @@ HMAC->SHA1(secret_key, '<message> <timestamp>')  (小写hex文本)
 
 JSON data
 
-### update, login:
+### update, login, register:
 
 ```
 {"code",<code num>,"message":"<message>","expire":<timestamp>,"token":"<token>","user":<userdata>}
@@ -80,7 +80,7 @@ JSON data
 0: 成功
 1: 用户不存在或密码错误
 2: 该用户名已存在
-3: <保留>
+3: 该邮箱已存在
 4: <保留>
 5: Token过期或不存在
 ```

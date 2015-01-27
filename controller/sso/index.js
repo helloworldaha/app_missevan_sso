@@ -4,6 +4,7 @@ var sso = new Router();
 
 require('./login')(sso);
 require('./logout')(sso);
+require('./register')(sso);
 require('./update')(sso);
 require('./session')(sso);
 
