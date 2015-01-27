@@ -15,7 +15,7 @@ auth='<message> <sign> <timestamp>'
 ### action:
 
 ```
-token, login, logout, register, update
+session, login, logout, register, update
 ```
 
 ### message (base64-encoded):
@@ -26,7 +26,7 @@ base64-encoded JSON data
 login: {"email":"<email>","password":"<password>","ip":"<ip>","maxAgeType":<max-age type>}
 可选: "maxAgeType", 默认: 0
 
-token, update, login: {"token":"<token>","ip":"<ip>"}
+session, update, login: {"token":"<token>","ip":"<ip>"}
 
 base64('<JSON data>')
 ```
@@ -54,7 +54,7 @@ HMAC->SHA1(secret_key, '<message> <timestamp>')  (小写hex文本)
 
 JSON data
 
-### token, login:
+### update, login:
 
 ```
 {"code",<code num>,"message":"<message>","expire":<timestamp>,"token":"<token>","user":<userdata>}
@@ -66,10 +66,10 @@ JSON data
 {"code",<code num>,"message":"<message>"}
 ```
 
-### update:
+### session:
 
 ```
-{"code",<code num>,"message":"<message>","token":"<token>"}
+{"code",<code num>,"message":"<message>","user":<userdata>}
 ```
 
 ## Code
@@ -80,5 +80,7 @@ JSON data
 0: 成功
 1: 用户不存在或密码错误
 2: 该用户名已存在
-3: Token过期或不存在
+3: <保留>
+4: <保留>
+5: Token过期或不存在
 ```

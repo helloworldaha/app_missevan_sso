@@ -71,7 +71,7 @@ module.exports = function (sso) {
             r.code = 1;
           }
         } else {
-          r.code = 3;
+          r.code = 5;
         }
       } else {
         r.code = -1;

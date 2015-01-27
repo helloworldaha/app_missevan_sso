@@ -4,6 +4,6 @@ var sso = new Router();
 
 require('./login')(sso);
 require('./update')(sso);
-require('./user')(sso);
+require('./session')(sso);
 
 module.exports = sso;

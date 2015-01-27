@@ -8,7 +8,7 @@ Account = Model.Account,
 Session = Model.Session;
 
 module.exports = function (sso) {
-  sso.post('/user', function *(next) {
+  sso.post('/session', function *(next) {
     var r = { code: -1 };
     if (this.auth && this.auth.token) {
       var vt = common.parse_token(this.auth.token);
@@ -21,10 +21,10 @@ module.exports = function (sso) {
           r.code = 0;
           r.user = session.getUserInfo();
         } else {
-          r.code = 3;
+          r.code = 5;
         }
       } else {
-        r.code = 3;
+        r.code = 5;
       }
     } else {
       r.code = -1;
