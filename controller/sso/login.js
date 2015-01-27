@@ -1,7 +1,8 @@
 'use strict';
 
 var config = require('./../../config');
-var errmsg = require('./../../lib/errno').errmsg;
+var errmsg = require('./../../lib/errno').errmsg,
+  common = require('./../../lib/common');
 var Model = require('./../../model'),
   Account = Model.Account,
   Session = Model.Session;
@@ -24,13 +25,24 @@ module.exports = function (sso) {
 
       if (user && !user.ban
         && Account.checkPassword(this.auth.password, user.password, user.salt)) {
-        var session = new Session({
+        var suser = {
           user_id: user.id,
           username: user.username,
           email: user.email,
-        });
+          iconid: user.iconid,
+          iconurl: user.iconurl,
+          iconcolor: user.iconcolor
+        };
+        var session = new Session(suser, this.auth.maxAgeType);
         var sess = yield session.save();
-        r.code = 0;
+        if (sess) {
+          r.code = 0;
+          r.expire = Math.floor(sess.expireAt.valueOf() / 1000);
+          r.token = common.sign_token(sess._id, sess.loginAt);
+          r.user = suser;
+        } else {
+          r.code = -2;
+        }
       } else {
         r.code = 1;
       }

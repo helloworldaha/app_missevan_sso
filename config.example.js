@@ -15,7 +15,8 @@ var config = {
   },
   app: {
     dev_mode: true,
-    secret_key: 'H1m60ntHOwKXniIXNxEBMxSSsk0Env1deAhJ'
+    secret_key: 'H1m60ntHOwKXniIXNxEBMxSSsk0Env1deAhJ',
+    token_key: 'AylLzOstESuH5fd9m9my3FDdgFuY4DGEerFf'
   },
   sys: {
     root_dir: root_dir
