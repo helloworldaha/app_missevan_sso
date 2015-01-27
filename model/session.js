@@ -47,5 +47,8 @@ function Session() {
 
 }
 
+Session.prototype.save = function *() {
+  return true;
+};
 
 module.exports = Session;
