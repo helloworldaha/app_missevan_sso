@@ -15,6 +15,9 @@ CREATE TABLE `m_user_account` (
   `ctime` int(10) unsigned NOT NULL,
   `utime` int(10) unsigned NOT NULL,
   `ban` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `iconid` int(10) unsigned NOT NULL DEFAULT '0',
+  `iconurl` varchar(60) NOT NULL DEFAULT 'icon01.png',
+  `iconcolor` varchar(50) NOT NULL DEFAULT '#91c0edm#cde1edm#709cc9m#5079c9m#709cc9',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
