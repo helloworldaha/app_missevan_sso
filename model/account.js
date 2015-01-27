@@ -33,13 +33,17 @@ var conn = mysql.createConnection(dbopts);
 var yconn = new generator(conn);
 
 function Account(user) {
-  if (user) {
-    this.id = user.id;
-  }
+  this.set(user);
 }
 
 Account.table = config2['table'];
 Account.supportThirdUid = ['qquid', 'weibouid'];
+
+Account.prototype.set = function (user) {
+  if (user) {
+    this.id = user.id;
+  }
+};
 
 Account.prototype.find = function *(id) {
   if (!id) id = this.id;
@@ -49,10 +53,18 @@ Account.prototype.find = function *(id) {
   return (r && r[0]) ? r[0][0] : null;
 };
 
+Account.prototype.exists = function *(data) {
+  if (common.is_empty_object(data)) {
+    throw new Error('数据为空');
+  }
+  var r = yield yconn.query('SELECT COUNT(id) as count FROM ' + Account.table + ' WHERE ? LIMIT 1', data);
+  return (r && r[0] && r[0][0]) ? r[0][0].count > 0 : false;
+};
+
 Account.prototype.update = function *(data) {
   var ud = {};
   var fields = {
-    'username': 'string', 'password': 'string', 'email': 'string',
+    'username': 'string', 'password': 'string',
     'iconid': 'number', 'iconurl': 'string', 'iconcolor': 'string'
   };
   for (var k in fields) {
@@ -61,19 +73,14 @@ Account.prototype.update = function *(data) {
     }
   }
   if (ud.username) {
-    ud.username = ud.trim();
+    ud.username = ud.username.trim();
   }
   if (ud.password) {
     ud.salt = hat(48); //12di
     ud.password = Account.hashPassword(ud.password, ud.salt);
   }
-  if (ud.email) {
-    ud.email = ud.email.toLowerCase().trim();
-    if (!validator.isEmail(ud.email)) {
-      //not an email
-      ud.email = undefined;
-      delete ud.email;
-    }
+  if (common.is_empty_object(ud)) {
+    return false;
   }
 
   var r = yield yconn.query('UPDATE ' + Account.table + ' SET ? WHERE ?',

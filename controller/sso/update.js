@@ -22,7 +22,25 @@ module.exports = function (sso) {
           var account = new Account({id: sess.user_id});
 
           if (this.auth.user) {
-            yield account.update(this.auth.user);
+            var u = this.auth.user;
+            if (u.username && (typeof u.username !== 'string'
+              || u.username === sess.username)) {
+              u.username = undefined;
+              delete u.username;
+            }
+            if (u.username) {
+              u.username = u.username.trim();
+              var exists = yield account.exists({
+                username: u.username
+              });
+              if (exists) {
+                r.code = 2;
+                r.message = errmsg(r.code);
+                this.body = r;
+                return;
+              }
+            }
+            yield account.update(u);
           }
 
           var user = yield account.find();
@@ -45,12 +63,12 @@ module.exports = function (sso) {
               r.code = 0;
               r.expire = Math.floor(session.expireAt.valueOf() / 1000);
               r.token = common.sign_token(session._id, session.loginAt);
-              r.user = suser;
+              r.user = session.getUserInfo();
             } else {
               r.code = -2;
             }
           } else {
-            r.code = 3;
+            r.code = 1;
           }
         } else {
           r.code = 3;
@@ -62,4 +80,4 @@ module.exports = function (sso) {
       this.body = r;
     }
   });
-}
+};

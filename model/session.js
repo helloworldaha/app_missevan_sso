@@ -92,6 +92,17 @@ Session.prototype.set = function (sess) {
   }
 };
 
+Session.prototype.getUserInfo = function () {
+  return {
+    user_id: this.user_id,
+    username: this.username,
+    email: this.email,
+    iconid: this.iconid,
+    iconurl: this.iconurl,
+    iconcolor: this.iconcolor
+  };
+};
+
 Session.prototype.setTime = function (maxAgeType) {
   var d = new Date();
   this.loginAt = new Date(d);
