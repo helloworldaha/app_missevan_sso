@@ -24,6 +24,7 @@ base64-encoded JSON data
 
 ```
 login: {"email":"<email>","password":"<password>","ip":"<ip>","maxAgeType":<max-age type>}
+register: {"email":"<email>","username":"<username>","password":"<password>","ip":"<ip>","maxAgeType":<max-age type>}
 可选: "maxAgeType", 默认: 0
 
 session, update, login: {"token":"<token>","ip":"<ip>"}
