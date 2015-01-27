@@ -42,8 +42,7 @@ module.exports = function (sso) {
         var user_id = yield account.save(u);
         var user;
         if (user_id) {
-          account.set({id: user_id});
-          user = yield account.find();
+          user = yield account.find(user_id);
         }
         if (user) {
           var suser = {
