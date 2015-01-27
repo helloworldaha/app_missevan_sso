@@ -64,7 +64,7 @@ Account.prototype.exists = function *(data) {
 Account.prototype.update = function *(data) {
   var ud = {};
   var fields = {
-    'username': 'string', 'password': 'string',
+    'username': 'string', 'password': 'string', 'uip': 'string',
     'iconid': 'number', 'iconurl': 'string', 'iconcolor': 'string'
   };
   for (var k in fields) {
@@ -82,6 +82,8 @@ Account.prototype.update = function *(data) {
   if (common.is_empty_object(ud)) {
     return false;
   }
+
+  ud.utime = Math.floor(Date.now() / 1000);
 
   var r = yield yconn.query('UPDATE ' + Account.table + ' SET ? WHERE ?',
     [ ud, { id: this.id } ]);

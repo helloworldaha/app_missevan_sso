@@ -70,13 +70,6 @@ Session.prototype.valueOf = function () {
   };
 };
 
-Session.prototype.find = function *(_id) {
-  if (!_id) _id = this._id;
-  var r = yield this.collection.findOne({_id: new ObjectID(_id)});
-  this.set(r);
-  return r;
-};
-
 Session.prototype.set = function (sess) {
   if (sess) {
     this._id = sess._id;
@@ -90,6 +83,13 @@ Session.prototype.set = function (sess) {
     this._id = this.user_id = this.username = this.email
       = this.iconid = this.iconurl = this.iconcolor = undefined;
   }
+};
+
+Session.prototype.find = function *(_id) {
+  if (!_id) _id = this._id;
+  var r = yield this.collection.findOne({_id: new ObjectID(_id)});
+  this.set(r);
+  return r;
 };
 
 Session.prototype.getUserInfo = function () {
@@ -156,8 +156,15 @@ Session.prototype.update = function *(data) {
     data = this.valueOf();
     delete data._id;
   }
-  return yield this.collection.update(
+  var r = yield this.collection.update(
     { _id: new ObjectID(this._id) }, { $set: data }, { w: 1 });
+  return r[0];
+};
+
+Session.prototype.remove = function *(_id) {
+  if (!_id) _id = this._id;
+  var r = yield this.collection.remove({_id: new ObjectID(_id)});
+  return r[0];
 };
 
 module.exports = Session;

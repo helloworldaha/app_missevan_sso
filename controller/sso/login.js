@@ -1,6 +1,7 @@
 'use strict';
 
 var config = require('./../../config');
+var validator = require('validator');
 var errmsg = require('./../../lib/errno').errmsg,
   common = require('./../../lib/common');
 var Model = require('./../../model'),
@@ -33,6 +34,14 @@ module.exports = function (sso) {
           iconurl: user.iconurl,
           iconcolor: user.iconcolor
         };
+
+        if (this.auth.ip) {
+          if (validator.isIP(this.auth.ip)) {
+            account.set({id: user.id});
+            yield account.update({uip: this.auth.ip});
+          }
+        }
+
         var session = new Session(suser, this.auth.maxAgeType);
         var sess = yield session.save();
         if (sess) {
