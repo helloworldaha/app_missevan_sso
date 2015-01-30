@@ -23,11 +23,13 @@ session, login, logout, register, update
 base64-encoded JSON data
 
 ```
-login: {"email":"<email>","password":"<password>","ip":"<ip>","maxAgeType":<max-age type>}
+login: {"email":"<email>","password":"<password>","ip":"<ip>","maxAgeType":<max-age type>,"pwhash":<pwhash boolean>}
 register: {"email":"<email>","username":"<username>","password":"<password>","ip":"<ip>","maxAgeType":<max-age type>}
 可选: "maxAgeType", 默认: 0
 
 session, update, login: {"token":"<token>","ip":"<ip>"}
+
+update: {"user_id":<user_id>,"update":{<user>},"ip":"<ip>"}
 
 base64('<JSON data>')
 ```
@@ -55,22 +57,16 @@ HMAC->SHA1(secret_key, '<message> <timestamp>')  (小写hex文本)
 
 JSON data
 
-### update, login, register:
+### update, login, register, session:
 
 ```
 {"code",<code num>,"message":"<message>","expire":<timestamp>,"token":"<token>","user":<userdata>}
 ```
 
-### logout:
+### logout, update (update from userId):
 
 ```
 {"code",<code num>,"message":"<message>"}
-```
-
-### session:
-
-```
-{"code",<code num>,"message":"<message>","user":<userdata>}
 ```
 
 ## Code

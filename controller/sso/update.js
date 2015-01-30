@@ -3,6 +3,8 @@
 var config = require('./../../config');
 var errmsg = require('./../../lib/errno').errmsg,
   common = require('./../../lib/common');
+
+var validator = require('validator');
 var Model = require('./../../model'),
   Account = Model.Account,
   Session = Model.Session;
@@ -73,6 +75,30 @@ module.exports = function (sso) {
         } else {
           r.code = 5;
         }
+      }
+    } else if (this.auth && this.auth.user_id && this.auth.update) {
+      if (validator.isNumeric(this.auth.user_id) && typeof this.auth.update == 'object') {
+        //update
+        var uid = parseInt(this.auth.user_id);
+        var u = this.auth.update;
+        var account = new Account({id: uid});
+        if (u.username) {
+          u.username = u.username.trim();
+          var exists = yield account.exists({
+            username: u.username
+          });
+          if (exists) {
+            r.code = 2;
+            r.message = errmsg(r.code);
+            this.body = r;
+            return;
+          }
+        }
+        if (this.auth.ip) {
+          u.uip = this.auth.ip;
+        }
+        yield account.update(u);
+        r.code = 0;
       }
     }
     r.message = errmsg(r.code);

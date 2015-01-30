@@ -14,18 +14,27 @@ module.exports = function (sso) {
     if (this.auth && this.auth.password) {
       var user;
       var account = new Account();
-      if (this.auth.email) {
-        user = yield account.getByEmail(this.auth.email);
-      }
+      var passwordPass = false;
+
       if (this.auth.qquid) {
         user = yield account.getByThirdUid('qquid', this.auth.qquid);
-      }
-      if (this.auth.weibouid) {
+        passwordPass = true;
+      } else if (this.auth.weibouid) {
         user = yield account.getByThirdUid('weibouid', this.auth.weibouid);
+        passwordPass = true;
+      } else if (this.auth.email) {
+        user = yield account.getByEmail(this.auth.email);
       }
 
-      if (user && !user.ban
-        && Account.checkPassword(this.auth.password, user.password, user.salt)) {
+      if (!passwordPass) {
+        if (this.auth.pwhash) {
+          passwordPass = this.auth.password === user.password;
+        } else {
+          passwordPass = Account.checkPassword(this.auth.password, user.password, user.salt);
+        }
+      }
+
+      if (user && !user.ban && passwordPass) {
         var suser = {
           user_id: user.id,
           username: user.username,

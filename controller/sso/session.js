@@ -19,6 +19,8 @@ module.exports = function (sso) {
         if (sess && Math.floor(sess.loginAt.valueOf() / 1000) === vt.timestamp
           && sess.expireAt > new Date()) {
           r.code = 0;
+          r.token = this.auth.token;
+          r.expire = Math.floor(sess.expireAt.valueOf() / 1000);
           r.user = session.getUserInfo();
         } else {
           r.code = 5;
