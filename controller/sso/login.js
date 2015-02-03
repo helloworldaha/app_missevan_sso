@@ -35,14 +35,7 @@ module.exports = function (sso) {
       }
 
       if (user && !user.ban && passwordPass) {
-        var suser = {
-          user_id: user.id,
-          username: user.username,
-          email: user.email,
-          iconid: user.iconid,
-          iconurl: user.iconurl,
-          iconcolor: user.iconcolor
-        };
+        var suser = Session.AccountFilter(user);
 
         if (this.auth.ip) {
           if (validator.isIP(this.auth.ip)) {

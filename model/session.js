@@ -54,6 +54,20 @@ function Session(sess, maxAgeType) {
   }
 }
 
+Session.AccountFilter = function (user) {
+  var suser = {
+    user_id: user.id,
+    username: user.username,
+    email: user.email,
+    iconid: user.iconid,
+    iconurl: user.iconurl,
+    iconcolor: user.iconcolor,
+    teamid: user.teamid || 0,
+    teamname: user.teamname || '',
+  };
+  return suser;
+};
+
 Session.prototype.valueOf = function () {
   return {
     _id: this._id,
@@ -63,6 +77,8 @@ Session.prototype.valueOf = function () {
     iconid: this.iconid,
     iconurl: this.iconurl,
     iconcolor: this.iconcolor,
+    teamid: this.teamid,
+    teamname: this.teamname,
 
     maxAgeType: this.maxAgeType,
     loginAt: this.loginAt,
@@ -79,8 +95,11 @@ Session.prototype.set = function (sess) {
     this.iconid = sess.iconid;
     this.iconurl = sess.iconurl;
     this.iconcolor = sess.iconcolor;
+    this.teamid = user.teamid;
+    this.teamname = user.teamname;
   } else {
     this._id = this.user_id = this.username = this.email
+      = this.teamid = this.teamname
       = this.iconid = this.iconurl = this.iconcolor = undefined;
   }
 };
@@ -99,7 +118,9 @@ Session.prototype.getUserInfo = function () {
     email: this.email,
     iconid: this.iconid,
     iconurl: this.iconurl,
-    iconcolor: this.iconcolor
+    iconcolor: this.iconcolor,
+    teamid: this.teamid,
+    teamname: this.teamname,
   };
 };
 

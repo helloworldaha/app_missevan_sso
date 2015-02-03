@@ -47,15 +47,8 @@ module.exports = function (sso) {
 
           var user = yield account.find();
           if (user) {
-            var suser = {
-              _id: sess._id, //session id
-              user_id: user.id,
-              username: user.username,
-              email: user.email,
-              iconid: user.iconid,
-              iconurl: user.iconurl,
-              iconcolor: user.iconcolor
-            };
+            var suser = Session.AccountFilter(user);
+            suser._id = sess._id;
 
             session.set(suser);
             session.setTime(sess.maxAgeType);
