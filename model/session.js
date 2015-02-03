@@ -95,8 +95,8 @@ Session.prototype.set = function (sess) {
     this.iconid = sess.iconid;
     this.iconurl = sess.iconurl;
     this.iconcolor = sess.iconcolor;
-    this.teamid = user.teamid;
-    this.teamname = user.teamname;
+    this.teamid = sess.teamid;
+    this.teamname = sess.teamname;
   } else {
     this._id = this.user_id = this.username = this.email
       = this.teamid = this.teamname
