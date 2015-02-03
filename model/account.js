@@ -38,7 +38,7 @@ function Account(user) {
 
 Account.table = config2['table'];
 Account.fields = {
-  'email': 'string', 'qquid': 'string', 'weibouid': 'string'
+  'email': 'string', 'qquid': 'string', 'weibouid': 'string',
   'username': 'string', 'password': 'string',
   'teamid': 'number', 'teamname': 'string',
   'cip': 'string', 'uip': 'string',
