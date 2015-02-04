@@ -40,7 +40,7 @@ Account.table = config2['table'];
 Account.fields = {
   'email': 'string', 'qquid': 'string', 'weibouid': 'string',
   'username': 'string', 'password': 'string',
-  'teamid': 'number', 'teamname': 'string',
+  'teamid': 'number', 'teamname': 'string', 'subtitle': 'string',
   'cip': 'string', 'uip': 'string',
   'confirm': 'number',
   'iconid': 'number', 'iconurl': 'string', 'iconcolor': 'string'

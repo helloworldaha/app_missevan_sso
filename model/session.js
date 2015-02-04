@@ -64,6 +64,7 @@ Session.AccountFilter = function (user) {
     iconcolor: user.iconcolor,
     teamid: user.teamid || 0,
     teamname: user.teamname || '',
+    subtitle: user.subtitle || '',
   };
   return suser;
 };
@@ -79,6 +80,7 @@ Session.prototype.valueOf = function () {
     iconcolor: this.iconcolor,
     teamid: this.teamid,
     teamname: this.teamname,
+    subtitle: this.subtitle,
 
     maxAgeType: this.maxAgeType,
     loginAt: this.loginAt,
@@ -97,9 +99,10 @@ Session.prototype.set = function (sess) {
     this.iconcolor = sess.iconcolor;
     this.teamid = sess.teamid;
     this.teamname = sess.teamname;
+    this.subtitle = sess.subtitle;
   } else {
     this._id = this.user_id = this.username = this.email
-      = this.teamid = this.teamname
+      = this.teamid = this.teamname = this.subtitle
       = this.iconid = this.iconurl = this.iconcolor = undefined;
   }
 };
@@ -121,6 +124,7 @@ Session.prototype.getUserInfo = function () {
     iconcolor: this.iconcolor,
     teamid: this.teamid,
     teamname: this.teamname,
+    subtitle: this.subtitle,
   };
 };
 
