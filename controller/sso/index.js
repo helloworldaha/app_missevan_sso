@@ -1,4 +1,3 @@
-
 var Router = require('koa-router');
 var sso = new Router();
 
