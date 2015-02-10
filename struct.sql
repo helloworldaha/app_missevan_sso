@@ -18,6 +18,9 @@ CREATE TABLE `m_user_account` (
   `iconid` int(10) unsigned NOT NULL DEFAULT '0',
   `iconurl` varchar(60) NOT NULL DEFAULT 'icon01.png',
   `iconcolor` varchar(50) NOT NULL DEFAULT '#91c0edm#cde1edm#709cc9m#5079c9m#709cc9',
+  `teamid` int(11) unsigned NOT NULL DEFAULT '0',
+  `teamname` varchar(20) NOT NULL DEFAULT '',
+  `subtitle` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
@@ -33,6 +36,9 @@ CREATE TABLE `m_user_account` (
   iconid,
   iconurl,
   iconcolor,
+  teamid,
+  teamname,
+  subtitle,
 
   access: []
 }
