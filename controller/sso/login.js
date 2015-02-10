@@ -44,8 +44,6 @@ module.exports = function (sso) {
           }
         }
         
-        console.dir(suser);
-        
         var session = new Session(suser, this.auth.maxAgeType);
         var sess = yield session.save();
         if (sess) {
