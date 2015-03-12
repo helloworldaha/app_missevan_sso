@@ -49,8 +49,13 @@ module.exports = function (sso) {
             suser._id = sess._id;
 
             session.set(suser);
+            if (this.auth.update) {
+              // update history session info
+              yield session.updateByUserId(sess.user_id);
+            }
             session.setTime(sess.maxAgeType);
             sess = null;
+            // update current session expires
             if (yield session.update()) {
               r.code = 0;
               r.expire = Math.floor(session.expireAt.valueOf() / 1000);
@@ -89,6 +94,10 @@ module.exports = function (sso) {
         }
         yield account.update(u);
         r.code = 0;
+
+        // update session
+        var session = new Session();
+        yield session.updateByUserId(uid, u);
       }
     }
     r.message = errmsg(r.code);

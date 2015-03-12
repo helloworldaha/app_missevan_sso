@@ -186,6 +186,17 @@ Session.prototype.update = function *(data) {
   return r[0];
 };
 
+Session.prototype.updateByUserId = function *(user_id, data) {
+  if (!data) {
+    data = this.valueOf();
+    delete data._id;
+    delete data.user_id;
+  }
+  var r = yield this.collection.update(
+    { user_id: this.user_id }, { $set: data }, { w: 1, multi: true });
+  return r[0];
+};
+
 Session.prototype.remove = function *(_id) {
   if (!_id) _id = this._id;
   var r = yield this.collection.remove({_id: new ObjectID(_id)});
