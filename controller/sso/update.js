@@ -17,14 +17,12 @@ module.exports = function (sso) {
       if (vt && vt.valid) {
         var session = new Session();
         var sess = yield session.find(vt.sid);
-
-        if (sess && Math.floor(sess.loginAt.valueOf() / 1000) === vt.timestamp
+        if (sess
           && sess.expireAt > new Date()) {
           //update
           var account = new Account({id: sess.user_id});
-
-          if (this.auth.user) {
-            var u = this.auth.user;
+          if (this.auth.update) {
+            var u = this.auth.update;
             if (u.username && (typeof u.username !== 'string'
               || u.username === sess.username)) {
               u.username = undefined;
@@ -53,7 +51,6 @@ module.exports = function (sso) {
             session.set(suser);
             session.setTime(sess.maxAgeType);
             sess = null;
-
             if (yield session.update()) {
               r.code = 0;
               r.expire = Math.floor(session.expireAt.valueOf() / 1000);
