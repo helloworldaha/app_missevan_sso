@@ -15,7 +15,11 @@ auth='<message> <sign> <timestamp>'
 ### action:
 
 ```
-session, login, logout, register, update
+login		#登录
+logout		#登出
+register	#注册，获取到token和session
+update		#更新用户信息
+session		#根据token获取session信息
 ```
 
 ### message (base64-encoded):

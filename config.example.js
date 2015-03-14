@@ -10,12 +10,12 @@ var root_dir = path.resolve(__dirname, '.') + '/';
 
 var config = {
   web: {
-    address: '127.0.0.1',
+    address: '115.29.235.9',
     port: 3002
   },
   app: {
     dev_mode: true,
-    secret_key: 'H1m60ntHOwKXniIXNxEBMxSSsk0Env1deAhJ',
+    secret_key: 'ME0XDi71bSZwCFEtZTDinJZoj1IhQN9dJ7IR',
     token_key: 'AylLzOstESuH5fd9m9my3FDdgFuY4DGEerFf'
   },
   sys: {
@@ -24,14 +24,14 @@ var config = {
   db: {
     /* database configurations */
     mysql: {
-      host: '192.168.1.147',
+      host: 'appmissevan.mysql.rds.aliyuncs.com',
       name: 'app_missevan_sso',
-      username: 'root',
-      password: '123456789',
+      username: 'missevan',
+      password: '1111111111',
       table: 'm_user'
     },
     mongo: {
-      host: '192.168.1.147',
+      host: '10.132.84.6',
       name: 'sso',
       username: '',
       password: '',
