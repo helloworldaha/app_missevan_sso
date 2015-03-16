@@ -11,7 +11,7 @@ var Model = require('./../../model'),
 module.exports = function (sso) {
   sso.post('/login', function *(next) {
     var r = { code: -1 };
-    if (this.auth && this.auth.password) {
+    if (this.auth && this.auth) {
       var user;
       var account = new Account();
       var passwordPass = false;
