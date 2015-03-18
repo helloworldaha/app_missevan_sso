@@ -24,11 +24,11 @@ var config = {
   db: {
     /* database configurations */
    mysql: {
-      host: 'missevan0.mysql.rds.aliyuncs.com',
+      host: '10.132.84.6',
       name: 'app_missevan_sso',
-      username: 'missevan',
-      password: 'woshiceshi',
-      table: 'm_user'
+      username: 'test',
+      password: 'test',
+      table: 'm_user_test'
     },
     mongo: {
       host: '10.132.84.6',
