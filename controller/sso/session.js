@@ -16,7 +16,7 @@ module.exports = function (sso) {
         var session = new Session();
         var sess = yield session.find(vt.sid);
 
-        if (sess && Math.floor(sess.loginAt.valueOf() / 1000) === vt.timestamp
+        if (sess && sess.loginAt && Math.floor(sess.loginAt.valueOf() / 1000) === vt.timestamp
           && sess.expireAt > new Date()) {
           r.code = 0;
           r.token = this.auth.token;
