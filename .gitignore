@@ -29,3 +29,5 @@ node_modules
 
 /.project
 /config.js
+.idea/*
+/test/test.js

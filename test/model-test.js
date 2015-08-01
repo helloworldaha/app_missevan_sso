@@ -1,4 +1,3 @@
-require("chai");
 require("should");
 
 var co = require('co');

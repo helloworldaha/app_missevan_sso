@@ -24,6 +24,8 @@ module.exports = function (sso) {
         passwordPass = true;
       } else if (this.auth.email) {
         user = yield account.getByEmail(this.auth.email);
+      } else if (this.auth.mobile) {
+        user = yield account.getByMobile(this.auth.mobile);
       }
 
       if (!passwordPass) {

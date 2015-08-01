@@ -58,13 +58,14 @@ Session.AccountFilter = function (user) {
   var suser = {
     user_id: user.id,
     username: user.username,
+    mobile: user.mobile,
     email: user.email,
     iconid: user.iconid,
     iconurl: user.iconurl,
     iconcolor: user.iconcolor,
     teamid: user.teamid || 0,
     teamname: user.teamname || '',
-    subtitle: user.subtitle || '',
+    subtitle: user.subtitle || ''
   };
   return suser;
 };

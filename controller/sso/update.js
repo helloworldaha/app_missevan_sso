@@ -30,7 +30,7 @@ module.exports = function (sso) {
             }
             if (u.username) {
               u.username = u.username.trim();
-              var exists = yield account.exists({
+              let exists = yield account.exists({
                 username: u.username
               });
               if (exists) {
@@ -40,6 +40,32 @@ module.exports = function (sso) {
                 return;
               }
             }
+
+            if (u.email) {
+              u.email = u.email.trim().toLowerCase();
+              let exists = yield account.exists({
+                email: u.email
+              });
+              if (exists) {
+                r.code = 3;
+                r.message = errmsg(r.code);
+                this.body = r;
+                return
+              }
+            }
+
+            if (u.mobile) {
+              let exists = yield account.exists({
+                mobile: u.mobile
+              });
+              if (exists) {
+                r.code = 3;
+                r.message = errmsg(r.code);
+                this.body = r;
+                return
+              }
+            }
+
             yield account.update(u);
           }
 
@@ -77,9 +103,10 @@ module.exports = function (sso) {
         var uid = parseInt(this.auth.user_id);
         var u = this.auth.update;
         var account = new Account({id: uid});
+
         if (u.username) {
           u.username = u.username.trim();
-          var exists = yield account.exists({
+          let exists = yield account.exists({
             username: u.username
           });
           if (exists) {
@@ -89,6 +116,32 @@ module.exports = function (sso) {
             return;
           }
         }
+
+        if (u.email) {
+          u.email = u.email.trim().toLowerCase();
+          let exists = yield account.exists({
+            email: u.email
+          });
+          if (exists) {
+            r.code = 3;
+            r.message = errmsg(r.code);
+            this.body = r;
+            return
+          }
+        }
+
+        if (u.mobile) {
+          let exists = yield account.exists({
+            mobile: u.mobile
+          });
+          if (exists) {
+            r.code = 3;
+            r.message = errmsg(r.code);
+            this.body = r;
+            return
+          }
+        }
+
         if (this.auth.ip) {
           u.uip = this.auth.ip;
         }

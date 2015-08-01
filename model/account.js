@@ -4,7 +4,7 @@
 * model/account.js
 * MissEvan SSO
 *
-* Author: 腾袭
+* Author: 腾袭 TomCao
 *
 * account model
 */
@@ -39,7 +39,7 @@ function Account(user) {
 Account.table = config2['table'];
 Account.fields = {
   'email': 'string', 'qquid': 'string', 'weibouid': 'string',
-  'username': 'string', 'password': 'string',
+  'username': 'string', 'password': 'string', 'mobile': 'number',
   'teamid': 'number', 'teamname': 'string', 'subtitle': 'string',
   'cip': 'string', 'uip': 'string',
   'confirm': 'number',
@@ -115,6 +115,13 @@ Account.prototype.getByEmail = function *(email) {
   email = email.toLowerCase();
   var r = yield yconn.query('SELECT * FROM ' + Account.table + ' WHERE ? LIMIT 1', {
     email: email
+  });
+  return (r && r[0]) ? r[0][0] : null;
+};
+
+Account.prototype.getByMobile = function *(mobile) {
+  var r = yield yconn.query('SELECT * FROM ' + Account.table + ' WHERE ? LIMIT 1', {
+    mobile: mobile
   });
   return (r && r[0]) ? r[0][0] : null;
 };
