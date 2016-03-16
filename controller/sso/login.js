@@ -27,7 +27,14 @@ module.exports = function (sso) {
       } else if (this.auth.mobile) {
         user = yield account.getByMobile(this.auth.mobile);
       }
-
+      
+      if (!user) {
+        r.code = 1
+        r.message = errmsg(r.code);
+        this.body = r;
+        return;
+      }     
+   
       if (!passwordPass) {
         if (this.auth.pwhash) {
           passwordPass = this.auth.password === user.password;

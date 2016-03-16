@@ -51,7 +51,7 @@ Account.format = function (data) {
   var ud = {};
   var fields = Account.fields;
   for (var k in fields) {
-    if (data[k] && typeof data[k] === fields[k]) {
+    if ((data[k] || data[k] === '') && typeof data[k] === fields[k]) {
       ud[k] = data[k];
     }
   }
