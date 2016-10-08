@@ -64,7 +64,7 @@ module.exports = function (sso) {
           r.code = -2;
         }
       } else {
-        r.code = 1;
+        r.code = 2;
       }
     }
 
