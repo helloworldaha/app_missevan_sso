@@ -173,6 +173,11 @@ Session.prototype.save = function *() {
   var data = this.valueOf();
   delete data._id;
   var r = yield this.collection.save(data);
+  if (r.result.ok) {
+    r = r.ops[0]
+  } else {
+    r = null
+  }
   this.set(r);
   return r ? r : null;
 };
@@ -184,7 +189,7 @@ Session.prototype.update = function *(data) {
   }
   var r = yield this.collection.update(
     { _id: new ObjectID(this._id) }, { $set: data }, { w: 1 });
-  return r[0];
+  return r ? r.result.ok : null;
 };
 
 Session.prototype.updateByUserId = function *(user_id, data) {
@@ -195,13 +200,13 @@ Session.prototype.updateByUserId = function *(user_id, data) {
   }
   var r = yield this.collection.update(
     { user_id: this.user_id }, { $set: data }, { w: 1, multi: true });
-  return r[0];
+  return r ? r.result.ok : null;
 };
 
 Session.prototype.remove = function *(_id) {
   if (!_id) _id = this._id;
   var r = yield this.collection.remove({_id: new ObjectID(_id)});
-  return r[0];
+  return r ? r.result.ok : null;
 };
 
 module.exports = Session;

@@ -10,7 +10,7 @@ var root_dir = path.resolve(__dirname, '.') + '/';
 
 var config = {
   web: {
-    address: '115.29.235.9',
+    address: '0.0.0.0',
     port: 3002
   },
   app: {
@@ -24,14 +24,14 @@ var config = {
   db: {
     /* database configurations */
    mysql: {
-      host: '10.132.84.6',
+      host: '192.168.2.10',
       name: 'app_missevan_sso',
-      username: 'test',
-      password: 'test',
-      table: 'm_user_test'
+      username: 'root',
+      password: 'rootmysql',
+      table: 'm_user'
     },
     mongo: {
-      host: '10.132.84.6',
+      host: '192.168.2.10',
       name: 'sso',
       username: '',
       password: '',

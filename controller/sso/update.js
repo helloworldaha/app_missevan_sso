@@ -126,7 +126,7 @@ module.exports = function (sso) {
             r.code = 3;
             r.message = errmsg(r.code);
             this.body = r;
-            return
+            return;
           }
         }
 
@@ -138,7 +138,7 @@ module.exports = function (sso) {
             r.code = 3;
             r.message = errmsg(r.code);
             this.body = r;
-            return
+            return;
           }
         }
 
