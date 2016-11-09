@@ -2,8 +2,7 @@ require("should");
 
 var co = require('co');
 var Model = require('./../model'),
-  Account = Model.Account,
-  Session = Model.Session;
+  Account = Model.Account;
 
 var name = "model";
 
