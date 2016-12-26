@@ -47,7 +47,6 @@ co(createConnection).catch(function (err) {
 function Session(sess, maxAgeType) {
 
   this.collection = ycollection;
-
   if (sess) {
     this.set(sess);
     this.setTime(maxAgeType);
@@ -63,6 +62,7 @@ Session.AccountFilter = function (user) {
     iconid: user.iconid,
     iconurl: user.iconurl,
     iconcolor: user.iconcolor,
+    confirm: user.confirm,
     teamid: user.teamid || 0,
     teamname: user.teamname || '',
     subtitle: user.subtitle || ''
@@ -82,6 +82,7 @@ Session.prototype.valueOf = function () {
     teamid: this.teamid,
     teamname: this.teamname,
     subtitle: this.subtitle,
+    confirm: this.confirm,
 
     maxAgeType: this.maxAgeType,
     loginAt: this.loginAt,
@@ -101,9 +102,10 @@ Session.prototype.set = function (sess) {
     this.teamid = sess.teamid;
     this.teamname = sess.teamname;
     this.subtitle = sess.subtitle;
+    this.confirm = sess.confirm;
   } else {
     this._id = this.user_id = this.username = this.email
-      = this.teamid = this.teamname = this.subtitle
+      = this.teamid = this.teamname = this.subtitle = this.confirm
       = this.iconid = this.iconurl = this.iconcolor = undefined;
   }
 };
