@@ -126,6 +126,7 @@ Session.prototype.getUserInfo = function () {
     teamid: this.teamid,
     teamname: this.teamname,
     subtitle: this.subtitle,
+    confirm: this.confirm
   };
 };
 
