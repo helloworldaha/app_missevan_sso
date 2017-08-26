@@ -34,10 +34,10 @@ register: {"email":"<email>","username":"<username>","password":"<password>","ip
 session, update, login: {"token":"<token>","ip":"<ip>"}
 
 update: {"user_id":<user_id>,"update":{<user>},"ip":"<ip>"}
-**注**：mobile 属性一定为 Number 类型，如果为 String 类型，更新会导致失败。
 
 base64('<JSON data>')
 ```
+**注**：mobile 属性一定为 Number 类型，如果为 String 类型，更新会导致失败。
 
 ### sign:
 
