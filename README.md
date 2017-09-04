@@ -65,13 +65,13 @@ JSON data
 ### update, login, register, session:
 
 ```
-{"code",<code num>,"message":"<message>","expire":<timestamp>,"token":"<token>","user":<userdata>}
+{"code":<code num>,"message":"<message>","expire":<timestamp>,"token":"<token>","user":<userdata>}
 ```
 
 ### logout, update (update from userId):
 
 ```
-{"code",<code num>,"message":"<message>"}
+{"code":<code num>,"message":"<message>"}
 ```
 
 ## Code
@@ -85,4 +85,23 @@ JSON data
 3: 该邮箱已存在
 4: <保留>
 5: Token过期或不存在
+```
+
+## 通知
+
+### sign
+
+```
+HMAC->SHA256(secret_key, '<message> <timestamp>')  (小写hex文本)
+```
+
+### message
+
+```json
+{
+  "type": "user",
+  "event": "updated",
+  "user_id": <user_id>,
+  "user": <userdata>
+}
 ```

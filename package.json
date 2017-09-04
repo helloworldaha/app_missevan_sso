@@ -17,6 +17,7 @@
     "mongodb": "^2.2.11",
     "mysql": "^2.5.4",
     "redis": "*",
+    "request": "^2.81.0",
     "validator": "^3.28.0"
   },
   "devDependencies": {

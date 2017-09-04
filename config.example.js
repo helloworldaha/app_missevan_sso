@@ -21,6 +21,9 @@ var config = {
   sys: {
     root_dir: root_dir
   },
+  notify: [
+    'http://example.com/api/user/notify',
+  ],
   db: {
     /* database configurations */
    mysql: {

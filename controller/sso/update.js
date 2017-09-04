@@ -2,7 +2,8 @@
 
 var config = require('./../../config');
 var errmsg = require('./../../lib/errno').errmsg,
-  common = require('./../../lib/common');
+  common = require('./../../lib/common'),
+  notify = require('./../../lib/notify');
 
 var validator = require('validator');
 var Model = require('./../../model'),
@@ -87,6 +88,8 @@ module.exports = function (sso) {
               r.expire = Math.floor(session.expireAt.valueOf() / 1000);
               r.token = common.sign_token(session._id, session.loginAt);
               r.user = session.getUserInfo();
+              // notify updated
+              notify.notify_user_updated(r.user);
             } else {
               r.code = -2;
             }
@@ -151,6 +154,13 @@ module.exports = function (sso) {
         // update session
         var session = new Session();
         yield session.updateByUserId(uid, u);
+
+        // notify updated
+        var user = yield account.find();
+        if (user) {
+          var suser = Session.AccountFilter(user);
+          notify.notify_user_updated(suser);
+        }
       }
     }
     r.message = errmsg(r.code);
